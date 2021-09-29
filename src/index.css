@@ -2,12 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400&display=swap");
 
 body {
-	font-family: 'Cousine', monospace;
+	font-family: "Cousine", monospace;
 	width: 100%;
 	max-width: 1440px;
 	margin: auto;
 	line-height: 1.5;
+	background-color: #090909;
+	color: #2eff7b;
+}
+
+button {
+	background-color: #2eff7b;
+	border: none;
+	outline: none;
+	height: 45px;
+}
+
+button:focus {
+	border: none;
+	outline: none;
 }
