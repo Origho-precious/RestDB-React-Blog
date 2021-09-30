@@ -113,3 +113,7 @@ textarea::-webkit-scrollbar {
 	opacity: 0;
 	pointer-events: none;
 }
+
+.rdb-preview:hover {
+	color: #2eff7b;
+}
