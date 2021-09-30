@@ -21,21 +21,33 @@ button {
 	height: 45px;
 }
 
-button:focus,
-input:focus {
+button:focus {
 	border: none;
 	outline: none;
 }
 
 input {
 	display: block;
+	background: transparent;
 	height: 45px;
 	border: 2px solid #2eff7b;
-	border-radius: 7px;
+	border-radius: 5px;
 	outline: none;
 	padding: 0 1rem;
+	width: 100%;
 }
 
+textarea {
+	display: block;
+	background: transparent;
+	border: 2px solid #2eff7b;
+	border-radius: 5px;
+	outline: none;
+	padding: 0.7rem 1rem;
+	width: 100%;
+	height: 240px;
+	resize: none;
+}
 
 .rdb-modal-backdrop {
 	background: rgba(0, 0, 0, 0.5);
@@ -67,7 +79,8 @@ input {
 	color: transparent;
 }
 
-.rdb-modal-content::-webkit-scrollbar {
+.rdb-modal-content::-webkit-scrollbar,
+textarea::-webkit-scrollbar {
 	width: 0.2rem;
 	height: 0rem;
 	border-radius: 10px;

@@ -5,7 +5,7 @@ const Navbar = (props) => {
 	const { pathname } = useLocation();
 
 	return (
-		<nav className="my-6 w-11/12 mx-auto flex items-center justify-between">
+		<nav className="my-4 w-11/12 mx-auto flex items-center justify-between">
 			<h3 className="text-2xl font-semibold">RestDB blog</h3>
 			{pathname === "/" ? (
 				<Link className="block" to="/write">
