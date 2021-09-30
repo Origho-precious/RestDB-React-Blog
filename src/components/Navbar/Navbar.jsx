@@ -1,12 +1,19 @@
 import Button from "../Button/Button";
+import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+	const { pathname } = useLocation();
+
 	return (
-		<nav className="my-6 w-10/12 mx-auto flex items-center justify-between">
+		<nav className="my-6 w-11/12 mx-auto flex items-center justify-between">
 			<h3 className="text-2xl font-semibold">RestDB blog</h3>
-			<ul>
-				<Button>Create Post</Button>
-			</ul>
+			{pathname === "/" ? (
+				<Link className="block" to="/write">
+					<Button>Create Post</Button>
+				</Link>
+			) : (
+				<Button style={{ background: "#fff" }}>Go back</Button>
+			)}
 		</nav>
 	);
 };
