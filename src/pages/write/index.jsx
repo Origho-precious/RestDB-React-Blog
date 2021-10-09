@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "../../components/Button/Button";
 import PostForm from "../../components/PostForm/PostForm";
+import PreviewPost from "../../components/PreviewPost/PreviewPost";
 
 const Write = () => {
 	const [previewMode, setPreviewMode] = useState(false);
@@ -35,7 +36,9 @@ const Write = () => {
 						<Button outline>Save Draft</Button>
 					</footer>
 				</>
-			) : null}
+			) : (
+				<PreviewPost children={'Hey'} />
+			)}
 		</div>
 	);
 };
