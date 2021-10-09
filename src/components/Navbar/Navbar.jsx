@@ -1,8 +1,9 @@
 import Button from "../Button/Button";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 const Navbar = (props) => {
 	const { pathname } = useLocation();
+	const history = useHistory();
 
 	return (
 		<nav className="my-4 w-11/12 mx-auto flex items-center justify-between">
@@ -12,7 +13,12 @@ const Navbar = (props) => {
 					<Button>Create Post</Button>
 				</Link>
 			) : (
-				<Button style={{ background: "#fff" }}>Go back</Button>
+				<Button
+					onClick={() => history.push("/")}
+					style={{ background: "transparent", color: "#2eff7b" }}
+				>
+					Go back
+				</Button>
 			)}
 		</nav>
 	);
