@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const truncateText = (text, maxNum) => {
 	return text.length <= maxNum ? text : `${text.slice(0, maxNum)}...`;
 };
@@ -9,3 +11,7 @@ export const calcReadTime = (text) => {
 
 	return `${time} min(s) read`;
 };
+
+export const convertDate = (date) => {
+	return moment().format("MMM Do, h:mm a");
+}

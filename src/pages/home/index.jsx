@@ -27,7 +27,7 @@ const Home = () => {
 					title={article?.title}
 					tags={article?.tags?.split(",")}
 					body={article?.body}
-					timeStamp={article?.timeStamp}
+					timeStamp={article?.timestamp}
 				/>
 			))}
 		</section>
