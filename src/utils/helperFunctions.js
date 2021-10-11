@@ -13,5 +13,5 @@ export const calcReadTime = (text) => {
 };
 
 export const convertDate = (date) => {
-	return moment().format("MMM Do, h:mm a");
-}
+	return moment(date).format("MMM Do, h:mm a");
+};
