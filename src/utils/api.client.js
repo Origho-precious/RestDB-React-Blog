@@ -8,12 +8,3 @@ export default axios.create({
 		"cache-control": "no-cache",
 	},
 });
-
-export const postArticle = async (article) => {
-	try {
-		const res = await axios.post("/aricles", JSON.stringify({ article }));
-		return res;
-	} catch (error) {
-		console.log(error);
-	}
-};

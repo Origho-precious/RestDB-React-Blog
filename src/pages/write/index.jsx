@@ -31,13 +31,14 @@ const Write = () => {
 			{!previewMode ? (
 				<>
 					<PostForm state="add" />
-					<footer className="flex mt-6">
-						<Button className="mr-6">Publish</Button>
-						<Button outline>Save Draft</Button>
+					<footer className="mt-4">
+						<Button form="post-article" type="submit" className="mr-6">
+							Publish
+						</Button>
 					</footer>
 				</>
 			) : (
-				<PreviewPost children={'Hey'} />
+				<PreviewPost children={"Hey"} />
 			)}
 		</div>
 	);
