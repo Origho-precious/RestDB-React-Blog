@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import axios from "../../utils/api.client";
 
-const PostForm = ({ state, id }) => {
+const PostForm = ({ state, id, setArticleBody }) => {
 	const history = useHistory();
+	const [data, setData] = useState(null);
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
 	const [tags, setTags] = useState("");
@@ -14,11 +15,13 @@ const PostForm = ({ state, id }) => {
 		if (id) {
 			const fetchArticles = async () => {
 				setLoading(true);
-				
+
 				try {
 					const { data } = await axios.get(`/articles/${id}`);
+					setData(data);
 					setTitle(data?.title);
 					setBody(data?.body);
+					setArticleBody(data?.body);
 					setTags(data?.tags);
 					setLoading(false);
 				} catch (error) {
@@ -29,44 +32,77 @@ const PostForm = ({ state, id }) => {
 
 			fetchArticles();
 		}
-	}, [id]);
+	}, [id, setArticleBody]);
 
 	const postArticle = async () => {
-		setLoading(true);
-
-		setError("");
-
-		try {
-			await axios.post(
-				"/articles",
-				JSON.stringify({
-					title,
-					body,
-					tags,
-					timestamp: new Date().toISOString(),
-				})
-			);
-
-			history.push("/");
-		} catch (error) {
-			setLoading(false);
-			setError("Something went wrong!");
-			console.log(error);
-		}
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
 		if ((title, body)) {
-			return postArticle();
+			setLoading(true);
+
+			setError("");
+
+			try {
+				await axios.post(
+					"/articles",
+					JSON.stringify({
+						title,
+						body,
+						tags,
+						timestamp: new Date().toISOString(),
+					})
+				);
+
+				return history.push("/");
+			} catch (error) {
+				setLoading(false);
+				setError("Something went wrong!");
+				return console.log(error);
+			}
 		}
 
 		setError("Title and Body fields can't be empty!");
 	};
 
+	const editArticle = async () => {
+		if ((title, body)) {
+			setLoading(true);
+
+			setError("");
+
+			try {
+				await axios.patch(
+					`/articles/${id}`,
+					JSON.stringify({
+						...data,
+						title,
+						body,
+						tags,
+					})
+				);
+
+				return history.push("/");
+			} catch (error) {
+				setLoading(false);
+				setError("Something went wrong!");
+				return console.log(error);
+			}
+		}
+
+		setError("Title and Body fields can't be empty!");
+	};
+
+	const onSubmitHandler = (e) => {
+		e.preventDefault();
+
+		if (state !== "edit") {
+			return postArticle();
+		}
+
+		return editArticle();
+	};
+
 	return (
 		<form
-			onSubmit={!loading && handleSubmit}
+			onSubmit={!loading && onSubmitHandler}
 			id="post-article"
 			className="w-full"
 		>
@@ -102,6 +138,7 @@ const PostForm = ({ state, id }) => {
 					onChange={(e) => {
 						setError("");
 						setBody(e.target.value);
+						setArticleBody(e.target.value);
 					}}
 					value={body}
 					placeholder="Write post content. You can use markdown syntax here"

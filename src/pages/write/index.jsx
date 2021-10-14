@@ -7,6 +7,7 @@ import PreviewPost from "../../components/PreviewPost/PreviewPost";
 const Write = () => {
 	const { id } = useParams();
 	const [previewMode, setPreviewMode] = useState(false);
+	const [articleBody, setArticleBody] = useState("");
 
 	return (
 		<div
@@ -22,7 +23,7 @@ const Write = () => {
 				{previewMode ? (
 					<p className="mr-3">Write</p>
 				) : (
-					<p className="mr-3">Preview</p>
+					<p className="mr-3">Preview Body</p>
 				)}
 				{!previewMode ? (
 					<i className="fas fa-eye" />
@@ -32,7 +33,11 @@ const Write = () => {
 			</div>
 			{!previewMode ? (
 				<>
-					<PostForm id={id} state={id ? "edit" : "add"} />
+					<PostForm
+						setArticleBody={setArticleBody}
+						id={id}
+						state={id ? "edit" : "add"}
+					/>
 					<footer className="mt-4">
 						<Button form="post-article" type="submit" className="mr-6">
 							Publish
@@ -40,7 +45,7 @@ const Write = () => {
 					</footer>
 				</>
 			) : (
-				<PreviewPost children={"Hey"} />
+				<PreviewPost children={articleBody} />
 			)}
 		</div>
 	);
