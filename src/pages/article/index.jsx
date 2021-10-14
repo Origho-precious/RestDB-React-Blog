@@ -12,27 +12,6 @@ const Article = () => {
 	const [loading, setLoading] = useState(false);
 	const [article, setArticle] = useState(null);
 
-	const fetchArticle = async () => {
-		if (params?.id) {
-			try {
-				setLoading(true);
-
-				const res = await axios.get(`/articles`, {
-					params: {
-						q: {
-							_id: params?.id,
-						},
-					},
-				});
-
-				setArticle(res?.data[0]);
-				setLoading(false);
-			} catch (error) {
-				setLoading(false);
-			}
-		}
-	};
-
 	useEffect(() => {
 		if (!params?.id) {
 			history.push("/");
@@ -40,6 +19,27 @@ const Article = () => {
 	}, [history, params]);
 
 	useEffect(() => {
+		const fetchArticle = async () => {
+			if (params?.id) {
+				try {
+					setLoading(true);
+
+					const res = await axios.get(`/articles`, {
+						params: {
+							q: {
+								_id: params?.id,
+							},
+						},
+					});
+
+					setArticle(res?.data[0]);
+					setLoading(false);
+				} catch (error) {
+					setLoading(false);
+				}
+			}
+		};
+
 		fetchArticle();
 	}, [params]);
 
