@@ -1,14 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import axios from "../../utils/api.client";
 
-const PostForm = ({ state = "add" }) => {
+const PostForm = ({ state, id }) => {
 	const history = useHistory();
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
 	const [tags, setTags] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
+
+	useEffect(() => {
+		if (id) {
+			const fetchArticles = async () => {
+				setLoading(true);
+				
+				try {
+					const { data } = await axios.get(`/articles/${id}`);
+					setTitle(data?.title);
+					setBody(data?.body);
+					setTags(data?.tags);
+					setLoading(false);
+				} catch (error) {
+					console.log(error);
+					setLoading(false);
+				}
+			};
+
+			fetchArticles();
+		}
+	}, [id]);
 
 	const postArticle = async () => {
 		setLoading(true);
@@ -62,6 +83,7 @@ const PostForm = ({ state = "add" }) => {
 						setTitle(e.target.value);
 					}}
 					placeholder="Enter the article's title"
+					disabled={id && loading && true}
 				/>
 			</div>
 			<div className="w-full my-6">
@@ -71,6 +93,7 @@ const PostForm = ({ state = "add" }) => {
 					value={tags}
 					onChange={(e) => setTags(e.target.value.trim())}
 					placeholder="(Optional) Tags e.g javascript, typescript "
+					disabled={id && loading && true}
 				/>
 			</div>
 			<div className="w-full">
@@ -82,6 +105,7 @@ const PostForm = ({ state = "add" }) => {
 					}}
 					value={body}
 					placeholder="Write post content. You can use markdown syntax here"
+					disabled={id && loading && true}
 				/>
 			</div>
 			{error && <p className="text-red-600 text-xs mt-3 -mb-1">{error}</p>}
