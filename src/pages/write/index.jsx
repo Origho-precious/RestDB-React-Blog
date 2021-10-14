@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useParams } from "react-router";
 import Button from "../../components/Button/Button";
 import PostForm from "../../components/PostForm/PostForm";
 import PreviewPost from "../../components/PreviewPost/PreviewPost";
 
 const Write = () => {
+	const { id } = useParams();
 	const [previewMode, setPreviewMode] = useState(false);
 
 	return (
@@ -30,7 +32,7 @@ const Write = () => {
 			</div>
 			{!previewMode ? (
 				<>
-					<PostForm state="add" />
+					<PostForm id={id} state={id ? "edit" : "add"} />
 					<footer className="mt-4">
 						<Button form="post-article" type="submit" className="mr-6">
 							Publish
