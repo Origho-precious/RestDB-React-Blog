@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
 	calcReadTime,
 	convertDate,
@@ -6,12 +6,35 @@ import {
 } from "../../utils/helperFunctions";
 
 const PostCard = ({ id, title, body, timeStamp, tags }) => {
+	const history = useHistory();
+
 	return (
 		<Link to={`/article/${id}`}>
 			<div
 				title={title}
-				className="flex flex-col justify-between bg-black h-48 py-8 px-12 rounded-md hover:bg-gray-900 transition-all duration-700"
+				className="flex flex-col justify-between bg-black h-48 py-10 px-12 rounded-md hover:bg-gray-900 transition-all duration-700 relative"
 			>
+				<div className="absolute top-4 right-6 flex justify-end">
+					<span
+						className="mr-5 hover:text-white"
+						onClick={(e) => {
+							e.preventDefault();
+						}}
+						role="button"
+					>
+						<i className="fas fa-trash" />
+					</span>
+					<span
+						className="hover:text-white"
+						onClick={(e) => {
+							e.preventDefault();
+							history.push(`/write/${id}`);
+						}}
+						role="button"
+					>
+						<i className="fas fa-pencil-alt" />
+					</span>
+				</div>
 				<div>
 					<h3 className="font-bold text-2xl mb-4">{truncateText(title, 37)}</h3>
 					<div className="flex">
