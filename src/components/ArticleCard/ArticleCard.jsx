@@ -4,9 +4,26 @@ import {
 	convertDate,
 	truncateText,
 } from "../../utils/helperFunctions";
+import axios from "../../utils/api.client";
 
-const PostCard = ({ id, title, body, timeStamp, tags }) => {
+const ArticleCard = ({ id, title, body, timeStamp, tags, refresh }) => {
 	const history = useHistory();
+
+	const handleDelete = async () => {
+		const confirmed = window.confirm(
+			"Are you sure you want to delete this article?"
+		);
+
+		if (confirmed) {
+			try {
+				await axios.delete(`/articles/${id}`);
+
+				refresh && refresh();
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	};
 
 	return (
 		<Link to={`/article/${id}`}>
@@ -19,6 +36,7 @@ const PostCard = ({ id, title, body, timeStamp, tags }) => {
 						className="mr-5 hover:text-white"
 						onClick={(e) => {
 							e.preventDefault();
+							handleDelete();
 						}}
 						role="button"
 					>
@@ -54,4 +72,4 @@ const PostCard = ({ id, title, body, timeStamp, tags }) => {
 	);
 };
 
-export default PostCard;
+export default ArticleCard;

@@ -5,6 +5,7 @@ import axios from "../../utils/api.client";
 const Home = () => {
 	const [articles, setArticles] = useState([]);
 	const [loading, setLoading] = useState(false);
+	const [refresh, setRefresh] = useState(false);
 
 	const fetchArticles = async () => {
 		setLoading(true);
@@ -20,7 +21,7 @@ const Home = () => {
 
 	useEffect(() => {
 		fetchArticles();
-	}, []);
+	}, [refresh]);
 
 	return (
 		<section className="w-1/2 mx-auto">
@@ -35,6 +36,7 @@ const Home = () => {
 							tags={article?.tags?.split(",")}
 							body={article?.body}
 							timeStamp={article?.timestamp}
+							refresh={() => setRefresh(!refresh)}
 						/>
 					</article>
 				))
