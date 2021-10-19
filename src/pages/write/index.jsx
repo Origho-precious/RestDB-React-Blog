@@ -12,7 +12,7 @@ const Write = () => {
 	return (
 		<div
 			className="px-20 py-8 relative text-white bg-black w-3/5 mx-auto rounded-lg"
-			style={{ height: "85vh", maxHeight: "600px" }}
+			style={{ height: "85vh", maxHeight: "600px", overflowY: "scroll" }}
 		>
 			<div
 				role="button"
