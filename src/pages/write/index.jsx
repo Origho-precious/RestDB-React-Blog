@@ -31,22 +31,21 @@ const Write = () => {
 					<i className="fas fa-pencil-alt" />
 				)}
 			</div>
-			{!previewMode ? (
-				<>
-					<PostForm
-						setArticleBody={setArticleBody}
-						id={id}
-						state={id ? "edit" : "add"}
-					/>
-					<footer className="mt-4">
-						<Button form="post-article" type="submit" className="mr-6">
-							Publish
-						</Button>
-					</footer>
-				</>
-			) : (
+			<div style={{ display: !previewMode ? "block" : "none" }}>
+				<PostForm
+					setArticleBody={setArticleBody}
+					id={id}
+					state={id ? "edit" : "add"}
+				/>
+				<footer className="mt-4">
+					<Button form="post-article" type="submit" className="mr-6">
+						Publish
+					</Button>
+				</footer>
+			</div>
+			<div style={{ display: previewMode ? "block" : "none" }}>
 				<PreviewPost children={articleBody} />
-			)}
+			</div>
 		</div>
 	);
 };
