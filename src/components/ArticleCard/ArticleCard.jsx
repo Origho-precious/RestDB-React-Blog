@@ -58,7 +58,7 @@ const ArticleCard = ({ id, title, body, timeStamp, tags, refresh }) => {
 					<div className="flex">
 						{tags?.map((tag, idx) => (
 							<p key={tag + idx} className="mr-4 opacity-80 text-white text-sm">
-								#{tag}
+								#{tag.trim()}
 							</p>
 						))}
 					</div>

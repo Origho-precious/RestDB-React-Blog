@@ -102,7 +102,7 @@ const PostForm = ({ state, id, setArticleBody }) => {
 
 	return (
 		<form
-			onSubmit={!loading && onSubmitHandler}
+			onSubmit={!loading ? onSubmitHandler : () => {}}
 			id="post-article"
 			className="w-full"
 		>
