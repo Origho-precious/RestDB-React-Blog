@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import axios from "../../utils/api.client";
 
 const PostForm = ({ state, id, setArticleBody }) => {
