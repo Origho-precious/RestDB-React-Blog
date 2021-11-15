@@ -35,7 +35,7 @@ const PostForm = ({ state, id, setArticleBody }) => {
 	}, [id, setArticleBody]);
 
 	const postArticle = async () => {
-		if ((title, body)) {
+		if (title && body) {
 			setLoading(true);
 
 			setError("");
@@ -63,7 +63,7 @@ const PostForm = ({ state, id, setArticleBody }) => {
 	};
 
 	const editArticle = async () => {
-		if ((title, body)) {
+		if (title && body) {
 			setLoading(true);
 
 			setError("");
